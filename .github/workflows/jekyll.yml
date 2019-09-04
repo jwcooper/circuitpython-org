@@ -34,3 +34,5 @@ jobs:
         git push --force $remote_repo HEAD:gh-pages && \
         rm -fr .git && \
         cd ..
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
