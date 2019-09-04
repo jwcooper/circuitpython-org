@@ -14,8 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@libraries
+    - uses: actions/checkout@v1
       with:
+        ref: "66c67684ba4b542275ab37a7c4ea4c1bdc59e06a"
         submodules: true
     - name: Build the site in the jekyll/builder container
       run: |
