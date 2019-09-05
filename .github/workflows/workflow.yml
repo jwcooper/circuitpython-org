@@ -24,7 +24,8 @@ jobs:
     - name: Build the site in the jekyll/builder container
       run: |
         bundle install
-        bundle exec jekyll build
+        bundle exec jekyll build -d build
+        cd build
         ls -ltr
         git status
         touch .nojekyll
