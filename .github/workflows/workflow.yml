@@ -1,6 +1,6 @@
 name: Jekyll site CI
 
-on: 
+on:
   push:
     branches:
       - master
@@ -11,19 +11,20 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
       with:
         submodules: true
         # ref: "6f404dac52d9171618a4be20c6c75f708cc10cf6"
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.x'
+   #- uses: ./.github/actions/jekyll-builder-action
     - name: Build the site in the jekyll/builder container
       run: |
-        docker run \
-        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
+        bundle install
+        bundle exec jekyll build
         ls -ltr
         git status
         touch .nojekyll
