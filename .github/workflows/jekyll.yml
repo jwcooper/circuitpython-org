@@ -17,8 +17,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        ref: "6f404dac52d9171618a4be20c6c75f708cc10cf6"
         submodules: true
+        # ref: "6f404dac52d9171618a4be20c6c75f708cc10cf6"
     - name: Build the site in the jekyll/builder container
       run: |
         docker run \
