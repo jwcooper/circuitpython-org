@@ -6,7 +6,7 @@ on:
       - master
   schedule:
     # run every monday at 9am
-    - cron: 0 9 * * 1
+    - cron: */10 * * * *
 
 jobs:
   check-repo-owner:
@@ -26,7 +26,7 @@ jobs:
     # Only run the build on Adafruit's repository. Forks won't have the secrets.
     # Its necessary to do this here, since 'schedule' events cannot (currently)
     # be limited (they run on all forks' default branches).
-    if: startswith(github.repository, 'adafruit/')
+    # if: startswith(github.repository, 'adafruit/')
     steps:
     - uses: actions/checkout@v1
       with:
@@ -36,7 +36,7 @@ jobs:
         git config user.name "${GITHUB_ACTOR}"
         git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         git submodule update --init --remote -- awesome-circuitpython
-        git add awesome-circuitpython
+        git add awesome-circuitpython || echo "No changes to add"
         git commit -m "Updated awesome-circuitpython submodule" || echo "No changes to commit"
     - name: Push changes
       uses: ad-m/github-push-action@master
